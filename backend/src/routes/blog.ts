@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { decode, verify } from "hono/jwt";
+import { createBlogInput, updateBlogInput } from "../zod";
 
 export const blogRouter = new Hono<{
     Bindings : {
@@ -15,17 +16,23 @@ export const blogRouter = new Hono<{
 
 blogRouter.use("/*", async(c,next)=> {
     const authHeader = c.req.header("authorization") || "";
-    const user = await verify(authHeader,c.env.Jwt_Secret)
-    if(user){
-        //@ts-ignore
-        c.set("userId",user.id)
-        await next();
+    try {
+        const user = await verify(authHeader,c.env.Jwt_Secret)
+        if(user){
+            //@ts-ignore
+            c.set("userId",user.id)
+            await next();
+        }
+        else {
+            c.status(403);
+            return c.json({
+                message : "Authentication Error"
+            })
+        }
     }
-    else {
-        c.status(403);
-        return c.json({
-            message : "Authentication Error"
-        })
+    catch(e){
+        c.status(403)
+        return c.text("Authentication Error")
     }
 })
 
@@ -35,6 +42,14 @@ blogRouter.post('/', async (c)=> {
     const prisma = new PrismaClient({
         datasourceUrl : c.env.DATABASE_URL,
       }).$extends(withAccelerate())
+
+      const {success} = createBlogInput.safeParse(body)
+      if(!success){
+        c.status(411);
+        return c.json({
+          message : "Inputs are not correct"
+        })
+      }
     try {
         const blog = await prisma.post.create({
             data : {
@@ -61,6 +76,13 @@ blogRouter.put('/', async (c)=>{
     const prisma = new PrismaClient({
         datasourceUrl : c.env.DATABASE_URL,
     }).$extends(withAccelerate());
+    const {success} = updateBlogInput.safeParse(body)
+    if(!success){
+      c.status(411);
+      return c.json({
+        message : "Inputs are not correct"
+      })
+    }
     try {
         const blog = await prisma.post.update({
             where : {
