@@ -32,9 +32,7 @@ userRouter.post('/signup',async (c) => {
       }
     })
     const token = await sign({id : user.id},c.env.Jwt_Secret)
-    return c.json({
-      token
-    })
+    return c.text(token)
   }
   catch(e) {
     c.status(411)
@@ -60,7 +58,7 @@ userRouter.post('/signin',async (c) => {
     return c.json({ message : "incorrect credentials"});
   }
   const jwt = await sign({ id : user.id}, c.env.Jwt_Secret);
-  return c.json({jwt});
+  return c.text(jwt);
 }
 catch(e) {
   c.status(411);
