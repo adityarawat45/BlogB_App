@@ -1,10 +1,11 @@
 import { useRecoilValue } from "recoil"
-import { Blog } from "../hooks"
+// import { Blog } from "../hooks"
 import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
 import UserInfo from "../hooks/recoil"
 
-export const Fullblog = ({ blog }: {blog: Blog}) => {
+//@ts-ignore
+export const Fullblog = ({ blog }) => {
     const userInfo = useRecoilValue(UserInfo);
     return <div>
         <Appbar />
