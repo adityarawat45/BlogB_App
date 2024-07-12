@@ -9,7 +9,7 @@ export const userRouter = new Hono<{
         DATABASE_URL : string;
         Jwt_Secret : string
     }
-}>;
+}>
 
 userRouter.post('/signup',async (c) => {
     const prisma = new PrismaClient({
@@ -56,9 +56,6 @@ userRouter.post('/signin',async (c) => {
       password : body.password
     }
   });
-
-  // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTF9.oBB_i9GYt9SsPbG7LIahFgQLI1_you__q2IpwkWnSBk"
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.9hGjGIq_oEnaKd8T-Lp54A_-3-4-n3Sad2Got7KDKVs
 
   if(!user){
     c.status(403);

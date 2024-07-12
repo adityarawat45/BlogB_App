@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
-import { decode, verify } from "hono/jwt";
+import { verify } from "hono/jwt";
 import { createBlogInput, updateBlogInput } from "../zod";
 const currentDate = new Date();
 
