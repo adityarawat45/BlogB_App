@@ -31,8 +31,12 @@ userRouter.post('/signup',async (c) => {
         name : body.name
       }
     })
-    const token = await sign({id : user.id},c.env.Jwt_Secret)
-    return c.text(token)
+    const name = user.name;
+    const jwt = await sign({id : user.id},c.env.Jwt_Secret)
+    return c.json({
+      name,
+      jwt
+    })
   }
   catch(e) {
     c.status(411)
@@ -48,17 +52,24 @@ userRouter.post('/signin',async (c) => {
   try {
   const user = await prisma.user.findFirst({
     where : {
-      username : body.email,
+      username : body.username,
       password : body.password
     }
   });
+
+  // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTF9.oBB_i9GYt9SsPbG7LIahFgQLI1_you__q2IpwkWnSBk"
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.9hGjGIq_oEnaKd8T-Lp54A_-3-4-n3Sad2Got7KDKVs
 
   if(!user){
     c.status(403);
     return c.json({ message : "incorrect credentials"});
   }
   const jwt = await sign({ id : user.id}, c.env.Jwt_Secret);
-  return c.text(jwt);
+  const name = user.name;
+  return c.json({
+    name :name,
+    jwt : jwt
+  })
 }
 catch(e) {
   c.status(411);

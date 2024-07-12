@@ -11,7 +11,6 @@ export const Blog = () => {
             <div>
                 <Appbar></Appbar>
                 <div className="w-full flex flex-col justify-center items-center">
-                
                 <BlogSkeleton></BlogSkeleton>
                 <BlogSkeleton></BlogSkeleton>
                 <BlogSkeleton></BlogSkeleton>
@@ -31,7 +30,7 @@ export const Blog = () => {
                             <BlogCard
                                 key={blog.id}
                                 id={blog.id}
-                                publishedDate="31st March 2024"
+                                publishedDate={blog.publishedDate || "31 Dec, 2024"}
                                 authorName={blog.author?.name || "Nothing"} 
                                 content={blog.content}
                                 title={blog.title}

@@ -3,11 +3,13 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 
 export interface Blog {
+    "publishedDate": string;
     "content" : string,
     "title" : string,
     "id" : number,
     "author" : {
         "name" : string
+        "description" : string
     }  
 }
 export const useBlogs = () =>{
@@ -20,6 +22,7 @@ export const useBlogs = () =>{
             }
         }).then((response)=> {setBlogs(response.data.blogs);setLoading(false)})
     },[])
+
     return {
         loading,
         blogs

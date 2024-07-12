@@ -20,3 +20,4 @@ export const Blogpage = () => {
         <Fullblog blog={blog} ></Fullblog>
     </div>
 }
+

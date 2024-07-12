@@ -1,10 +1,13 @@
 import { ChangeEvent,  useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import { frontendsigninInput, frontendsignupInput } from "../zod";
+import { frontendsignupInput } from "../zod";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useRecoilState } from "recoil";
+import UserInfo from "../hooks/recoil";
 
 const Auth = ({type} : {type : "signup" | "signin"}) => {
+    const [userInfo,setUserinfo] = useRecoilState(UserInfo);
     const navigate = useNavigate();
     const [postInputs, setpostInputs] = useState<frontendsignupInput>({
         username : "",
@@ -15,7 +18,12 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
     async function sendReq(){
         try{
             const response = await axios.post(`${BACKEND_URL}/api/v1/user${type === "signup" ? "/signup" : "/signin"}`, postInputs);
-         const jwt = response.data;
+         const jwt = response.data.jwt;
+         const name = response.data.name;
+         setUserinfo({
+            ...userInfo,
+            name
+         })
          localStorage.setItem("token",jwt);
          navigate("/blogs")
         }
@@ -41,7 +49,7 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
                     username : e.target.value
                 })
             }}></LabelledInput>
-            <LabelledInput title="Password" placeholder="!123@abc" type="password" onChange={(e)=>{
+            <LabelledInput title="Password" placeholder="123!@abc" type="password" onChange={(e)=>{
                 setpostInputs({
                     ...postInputs,
                     password : e.target.value

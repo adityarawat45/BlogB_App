@@ -4,10 +4,16 @@ import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
+const currentDate = new Date()
+
+let publishedDate = `${currentDate.toDateString().slice(4,)}`
+
 export const Publish = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
+
+
 
     return <div>
         <Appbar />
@@ -26,6 +32,7 @@ export const Publish = () => {
                 <button onClick={async () => {
                     const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
                         title,
+                        publishedDate,
                         content: description
                     }, {
                         headers: {

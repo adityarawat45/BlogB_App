@@ -5,11 +5,13 @@ import { Blog } from "./pages/Blog";
 import { Blogpage } from "./pages/Blogpage";
 import { Publish } from "./pages/Publish";
 import Landing from "./pages/Landing";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+    <RecoilRoot>
+    <Routes>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>
         <Route path="/blog/:id" element={<Blogpage></Blogpage>}></Route>
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<Landing></Landing>}></Route>
         <Route path="/publish" element={<Publish></Publish>}></Route>
       </Routes>
+    </RecoilRoot>
     </BrowserRouter>
   )
 }

@@ -3,6 +3,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { decode, verify } from "hono/jwt";
 import { createBlogInput, updateBlogInput } from "../zod";
+const currentDate = new Date();
 
 export const blogRouter = new Hono<{
     Bindings : {
@@ -55,6 +56,7 @@ blogRouter.post('/', async (c)=> {
             data : {
                 title : body.title,
                 content : body.content,
+                publishedDate : body.publishedDate,
                 authorId : parseInt(authorId)
             }
         })
@@ -115,6 +117,7 @@ blogRouter.get('/bulk', async (c)=> {
             content : true,
             title :true,
             id : true,
+            publishedDate : true,
             author : {
                 select : {
                     name : true
@@ -148,9 +151,10 @@ blogRouter.get('/:id', async (c)=>{
                 id: true,
                 title : true,
                 content : true,
+                publishedDate : true,
                 author : {
                     select  : {
-                        name : true
+                        name : true,
                     }
                 }
             }
