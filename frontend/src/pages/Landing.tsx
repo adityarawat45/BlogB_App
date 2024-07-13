@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { SecondBar } from "../components/SecondBar"
-import bloggingImage from "../images/blogging.png";
+import bloggingImage from "../images/blog.png";
 import { Footer } from "../components/Footer";
 
 const Landing = () => {
