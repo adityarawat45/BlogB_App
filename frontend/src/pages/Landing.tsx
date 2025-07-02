@@ -32,9 +32,17 @@ const Landing = () => {
     //     <Footer></Footer>
     //   </div>
     // </div>
-    <div className="md:flex-col lg:grid-cols-2">
-      <SecondBar></SecondBar>
+    <div className="">
+  <SecondBar />
+  <div className="h-screen">
+    <div className="h-screen flex flex-col justify-around items-center md:grid md:grid-cols-2">
+      <div>Section-1</div>
+      <div>Section-2</div>
     </div>
+    <Footer></Footer>
+  </div>
+</div>
+
   )
 }
 

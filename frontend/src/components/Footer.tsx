@@ -1,6 +1,5 @@
 export const Footer = ()=> {
-    return <div>
-         <div className="w-full border-t flex flex-row justify-center items-center py-3 text-stone-600 border-stone-300">
+    return <div className="absolute w-full border-t flex flex-row justify-center items-center py-3 text-stone-600 border-stone-300">
             <div>
                 <div className="text-center text-xs md:text-normal">
                     Made by Aditya
@@ -15,5 +14,4 @@ export const Footer = ()=> {
                 </div>
             </div>
          </div>
-    </div>
 }
