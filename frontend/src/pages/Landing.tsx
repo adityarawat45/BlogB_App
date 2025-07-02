@@ -34,15 +34,12 @@ const Landing = () => {
     // </div>
     <div className="">
   <SecondBar />
-  <div className="h-screen">
-    <div className="h-screen flex flex-col justify-around items-center md:grid md:grid-cols-2">
-      <div>Section-1</div>
-      <div>Section-2</div>
+    <div className="w-screen h-screen grid grid-rows-2 md:grid-cols-2 justify-center md:items-center items-center">
+      <div className="w-screen h-full md:h-screen md:w-auto bg-stone-300"><div className="rounded-3xl h-4/5 md:h-3/5 mx-5 my-3 md:my-16 bg-stone-500 backdrop-blur-xl row-span-1 flex justify-center items-center">Section-1</div></div>
+      <div className="w-screen h-full  md:h-screen md:w-auto bg-stone-500"><div className="rounded-3xl h-4/5 md:h-3/5 mx-5 my-3 md:my-16 bg-stone-300 backdrop-blur-xl row-span-1 flex justify-center items-center">Section-2</div></div>
     </div>
     <Footer></Footer>
-  </div>
 </div>
-
   )
 }
 
