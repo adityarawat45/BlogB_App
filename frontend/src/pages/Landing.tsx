@@ -35,15 +35,16 @@ const Landing = () => {
     <div className="w-screen h-screen">
       <SecondBar></SecondBar>
       <div className="w-full h-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 ">
-        <div className="h-full md:h-full md:w-auto w-screen bg-stone-400 flex flex-col justify-center gap-5 items-center">
-          <div className="text-3xl md:text-9xl text-stone-200 font-extrabold">Blog Nest</div>
-          <div className="md:px-24 px-16 md:py-5 text-center text-md md:text-4xl font-medium text-stone-100">Welcome to our blogging hub, where ideas flourish and perspectives thrive. Join us on a journey of discovery, where every word sparks a new conversation and every post invites you to explore deeper.</div>
+        <div className="h-full md:h-full md:w-auto w-screen bg-stone-400 flex flex-col justify-center items-center">
+          <div className="text-5xl md:text-9xl text-amber-950 font-extrabold my-2">Blog Nest</div>
+          <div className="sm:block md:hidden text-xl text-pretty font-extrabold text-stone-200 text-left mb-5">Create. Share. Explore!</div>
+          <div className="hidden md:block md:px-32 px-16 md:py-5 text-center text-md md:text-4xl font-medium text-stone-100">Welcome to our blogging hub, where ideas flourish and perspectives thrive. Join us on a journey of discovery, where every word sparks a new conversation and every post invites you to explore deeper.</div>
           <div className="flex flex-row items-center gap-5 mt-2 md:mt-12">
           <Link to={`signup`}>
-            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-400 font-extrabold text-sm md:text-xl mx-2 rounded-md px-4 md:px-14 py-1 md:py-3">Sign Up</div>
+            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-amber-950 font-extrabold text-sm md:text-xl mx-2 rounded-md px-4 md:px-14 py-1 md:py-3">Sign Up</div>
           </Link>
           <Link to={`signin`}>
-            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-400 font-extrabold text-sm md:text-xl mx-3 rounded-md px-4 md:px-14  py-1 md:py-3 ">Sign In</div>
+            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-amber-950 font-extrabold text-sm md:text-xl mx-3 rounded-md px-4 md:px-14  py-1 md:py-3 ">Sign In</div>
           </Link>
           </div>
         </div>
