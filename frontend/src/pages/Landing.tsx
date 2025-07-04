@@ -32,14 +32,24 @@ const Landing = () => {
     //     <Footer></Footer>
     //   </div>
     // </div>
-    <div className="">
-  <SecondBar />
-    <div className="w-screen h-screen grid grid-rows-2 md:grid-cols-2 justify-center md:items-center items-center">
-      <div className="w-screen h-full md:h-screen md:w-auto bg-stone-300"><div className="rounded-3xl h-4/5 md:h-3/5 mx-5 my-3 md:my-16 bg-stone-500 backdrop-blur-xl row-span-1 flex justify-center items-center">Section-1</div></div>
-      <div className="w-screen h-full  md:h-screen md:w-auto bg-stone-500"><div className="rounded-3xl h-4/5 md:h-3/5 mx-5 my-3 md:my-16 bg-stone-300 backdrop-blur-xl row-span-1 flex justify-center items-center">Section-2</div></div>
+    <div className="w-screen h-screen">
+      <SecondBar></SecondBar>
+      <div className="w-full h-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 ">
+        <div className="h-full md:h-full md:w-auto w-screen bg-stone-400 flex flex-col justify-center gap-5 items-center">
+          <div className="text-3xl md:text-9xl text-stone-200 font-extrabold">Blog Nest</div>
+          <div className="md:px-24 px-16 md:py-5 text-center text-md md:text-4xl font-medium text-stone-100">Welcome to our blogging hub, where ideas flourish and perspectives thrive. Join us on a journey of discovery, where every word sparks a new conversation and every post invites you to explore deeper.</div>
+          <div className="flex flex-row items-center gap-5 mt-2 md:mt-12">
+          <Link to={`signup`}>
+            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-400 font-extrabold text-sm md:text-xl mx-2 rounded-md px-4 md:px-14 py-1 md:py-3">Sign Up</div>
+          </Link>
+          <Link to={`signin`}>
+            <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-400 font-extrabold text-sm md:text-xl mx-3 rounded-md px-4 md:px-14  py-1 md:py-3 ">Sign In</div>
+          </Link>
+          </div>
+        </div>
+        <div className="h-full md:h-full md:w-auto w-screen bg-stone-200 flex justify-center items-center">Section - 2</div>
+      </div>
     </div>
-    <Footer></Footer>
-</div>
   )
 }
 
