@@ -18,11 +18,11 @@ export const Publish = () => {
     return <div>
         <Appbar />
         <div className="flex justify-center w-full pt-8"> 
-            <div className="w-full lg:px-48 lg:60">
-                <div className="flex justify-center lg:justify-normal">
+            <div className="w-full md:px-48 md:60">
+                <div className="flex justify-center md:justify-normal">
                 <input onChange={(e) => {
                     setTitle(e.target.value)
-                }} type="text" className="w-full lg:w-4/6 bg-gray-100 border mx-2 border-stone-300 text-gray-900 text-sm rounded-lg focus:outline-slate-500 p-2.5" placeholder="Title" />
+                }} type="text" className="w-full md:w-4/6 bg-gray-100 border mx-2 border-stone-300 text-gray-900 text-sm rounded-lg focus:outline-slate-500 p-2.5" placeholder="Title" />
                 </div>
                 
 
@@ -40,7 +40,7 @@ export const Publish = () => {
                         }
                     });
                     navigate(`/blog/${response.data.id}`)
-                }} type="submit" className="mt-2 ml-2 inline-flex items-center px-2 lg:px-5 py-1 lg:py-2.5 text-xs lg:text-sm font-medium text-center text-gray-100 bg-slate-900 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                }} type="submit" className="mt-2 ml-2 inline-flex items-center px-2 md:px-5 py-1 md:py-2.5 text-xs md:text-sm font-medium text-center text-gray-100 bg-slate-900 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                     Publish post
                 </button>
             </div>
