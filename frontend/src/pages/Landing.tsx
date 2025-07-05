@@ -1,11 +1,24 @@
-import { Link } from "react-router-dom";
 import { SecondBar } from "../components/SecondBar"
 import ThankYouCardImage from "../images/bg.jpg"
+import Auth from "../components/Auth"
+import { useState } from "react";
 
 
 const Landing = () => {
+  const [showAuthModal, setShowAuthModal] = useState<"signin" | "signup" | null>(null);
   return (
     <div className="w-screen h-screen bg-stone-400">
+            {showAuthModal && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm z-40"
+          onClick={() => setShowAuthModal(null)}
+        ></div>
+      )}
+      {showAuthModal && (
+        <div className="fixed inset-0 flex items-center h-screen w-screen justify-center z-50">
+            <Auth type={showAuthModal} />
+        </div>
+      )}
       <SecondBar></SecondBar>
       <div className="w-full h-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 ">
         <div className="h-full md:h-full md:w-auto w-screen bg-gradient-to-b from-stone-500 to-zinc-200 flex flex-col justify-center items-center rounded-b-full border-b-stone-400 border-b-4 md:rounded-none md:border-b-0">
@@ -13,12 +26,12 @@ const Landing = () => {
           <div className="sm:block md:hidden text-3xl text-pretty font-extrabold text-stone-100 text-left mb-10">Create. Share. Explore!</div>
           <div className="hidden md:block md:px-32 px-16 md:py-5 text-center text-md md:text-4xl font-medium text-stone-100">Welcome to our blogging hub, where ideas flourish and perspectives thrive. Join us on a journey of discovery, where every word sparks a new conversation and every post invites you to explore deeper.</div>
           <div className="flex flex-row items-center gap-5 mt-2 md:mt-12">
-          <Link to={`signup`}>
+          <button onClick={() => setShowAuthModal("signup")} >
             <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-700 font-extrabold text-sm md:text-xl mx-2 rounded-md px-4 md:px-14 py-1 md:py-3">Sign Up</div>
-          </Link>
-          <Link to={`signin`}>
+          </button>
+          <button onClick={() => setShowAuthModal("signin")} >
             <div className="border bg-gradient-to-tr from-slate-100 to-stone-200  text-stone-700 font-extrabold text-sm md:text-xl mx-3 rounded-md px-4 md:px-14  py-1 md:py-3 ">Sign In</div>
-          </Link>
+          </button>
           </div>
         </div>
         <div className="h-full md:h-full md:w-auto w-screen bg-stone-400 flex  items-end p-4 md:p-0">
