@@ -49,7 +49,7 @@ const Landing = () => {
           </div>
         </div>
         <div className="h-full md:h-full md:w-auto w-screen bg-stone-400 flex  items-end p-4 md:p-0">
-          <img src={ThankYouCardImage} className=" w-full h-full rounded-3xl md:rounded-none opacity-90 backdrop-blur-sm"/> <div className="z-10 absolute font-extrabold text-stone-100 text-4xl text-left italic p-9 md:p-28 md:text-9xl">Made By <br></br>Aditya<div className="text-2xl md:text-5xl text-stone-100">With Love and Coffee....</div> </div>
+          <img src={ThankYouCardImage} className=" w-full h-full rounded-3xl md:rounded-none opacity-90 backdrop-blur-sm~"/> <div className="z-10 absolute font-extrabold text-stone-100 text-4xl text-left italic p-9 md:p-28 md:text-9xl">Made By <br></br>Aditya<div className="text-2xl md:text-5xl text-stone-100">With Love and Coffee....</div> </div>
         </div>
       </div>
     </div>
