@@ -10,9 +10,9 @@ export const Fullblog = ({ blog }) => {
     return <div>
         <Appbar />
         <div className="flex justify-center">
-            <div className="md:grid md:grid-cols-12 w-full pt-200 max-w-screen-xl">
-                <div className="col-span-8 pt-2 px-6 md:px-9 md:pt-8">
-                    <div className="text-3xl md:text-5xl font-extrabold">
+            <div className="lg:grid lg:grid-cols-12 w-full pt-200 max-w-screen-xl">
+                <div className="col-span-8 pt-2 px-6 lg:px-9 lg:pt-8">
+                    <div className="text-3xl lg:text-5xl font-extrabold">
                         {blog.title}
                     </div>
                     <div className="text-slate-500 pt-2">
@@ -22,7 +22,7 @@ export const Fullblog = ({ blog }) => {
                         {blog.content}
                     </div>
                 </div>
-                <div className="invisible md:visible ml-5 col-span-4 py-3 h-screen px-4 border-l-2 bg-stone-100 border-stone-300">
+                <div className="invisible lg:visible ml-5 col-span-4 py-3 h-screen px-4 border-l-2 bg-stone-100 border-stone-300">
                 <div className="">
                     <div className="text-slate-600 text-lg">
                         Author
