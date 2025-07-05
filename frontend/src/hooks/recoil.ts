@@ -4,7 +4,7 @@ const UserInfo = atom({
     key : 'UserInfo',
     default : {
         name : 'Anonymous',
-        description : 'Hey there! I like blogging, and I love Blog Nest!'
+        description : 'Hey there! I like blogging, and I love Blogster!'
     }
 })
 

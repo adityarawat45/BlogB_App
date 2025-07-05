@@ -9,7 +9,7 @@ export const Appbar=() =>{
     return <div className="sticky top-0 z-50 bg-stone-300 border-b flex py-2 justify-between items-center px-5 md:px-8">
         <Link to="/">
         <div className="text-lg md:text-xl font-extrabold cursor-pointer text-slate-900">
-            Blog Nest
+            Blogster
         </div>
         </Link>
         <div className="flex flex-row justify-center items-center">
