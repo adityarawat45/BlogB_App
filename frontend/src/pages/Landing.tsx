@@ -1,22 +1,24 @@
 import { SecondBar } from "../components/SecondBar"
 import ThankYouCardImage from "../images/bg.jpg"
 import Auth from "../components/Auth"
-import { useState } from "react";
+import { AuthInfo } from "../hooks/recoil";
+import { useRecoilState } from "recoil";
 
 
 const Landing = () => {
-  const [showAuthModal, setShowAuthModal] = useState<"signin" | "signup" | null>(null);
+  console.log("Rendered the Landing page");
+  const [showAuthModal, setShowAuthModal] = useRecoilState(AuthInfo)
   return (
     <div className="w-screen h-screen bg-stone-400">
             {showAuthModal && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm z-40"
-          onClick={() => setShowAuthModal(null)}
+          onClick={() => setShowAuthModal(false)}
         ></div>
       )}
       {showAuthModal && (
         <div className="fixed inset-0 flex items-center h-screen w-screen justify-center z-50">
-            <Auth type={showAuthModal} />
+            <Auth key={showAuthModal} type={showAuthModal} />
         </div>
       )}
       <SecondBar></SecondBar>

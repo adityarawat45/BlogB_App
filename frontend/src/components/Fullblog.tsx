@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil"
 // import { Blog } from "../hooks"
 import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
-import UserInfo from "../hooks/recoil"
+import {UserInfo} from "../hooks/recoil"
 
 //@ts-ignore
 export const Fullblog = ({ blog }) => {

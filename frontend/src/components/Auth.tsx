@@ -4,10 +4,12 @@ import { frontendsignupInput } from "../zod";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useRecoilState } from "recoil";
-import UserInfo from "../hooks/recoil";
+import {UserInfo, AuthInfo} from "../hooks/recoil";
 
 const Auth = ({type} : {type : "signup" | "signin"}) => {
+    console.log("Rendered the Auth componenet with type : ", type);
     const [userInfo,setUserinfo] = useRecoilState(UserInfo);
+    const [authType, setAuthType] = useRecoilState(AuthInfo);
     const navigate = useNavigate();
     const [postInputs, setpostInputs] = useState<frontendsignupInput>({
         username : "",
@@ -35,7 +37,7 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
     <div className="flex justify-center h-screen w-screen rounded-lg items-center flex-col">
         <div className="shadow-lg shadow-stone-400 md:w-1/3 w-auto bg-stone-300 rounded-2xl flex flex-col justify-center ">
             <div className="md:text-3xl text-xl font-bold flex mx-2 flex-row text-stone-700 justify-center mt-3"> {type == "signin" ? "Account Login" : "Create account"}</div>
-            <div className="text-stone-700  mx-2 text-sm md:text-md flex flex-row justify-center">{type ==="signin" ?"Don't have an account?" : "Already have an account?"}<Link className="underline ml-2" to={type === "signin" ? "/signup" : "/signin"}>{type == "signin" ? "Sign Up" : "Sign In"}</Link></div>
+            <div className="text-stone-700  mx-2 text-sm md:text-md flex flex-row justify-center">{type ==="signin" ?"Don't have an account?" : "Already have an account?"}<button className="underline ml-2" onClick={()=>{setAuthType( type === "signin" ? "signup" : "signin")}}> {authType} </button></div>
             {type === "signup" ? <LabelledInput  title="Name" placeholder="Adam Young" onChange={(e)=>{
                 setpostInputs({
                     ...postInputs,

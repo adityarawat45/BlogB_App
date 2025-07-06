@@ -1,6 +1,6 @@
 import {atom} from "recoil";
 
-const UserInfo = atom({
+export const UserInfo = atom({
     key : 'UserInfo',
     default : {
         name : 'Anonymous',
@@ -8,20 +8,9 @@ const UserInfo = atom({
     }
 })
 
-// const user = useRecoilValue(UserInfo);
+export const AuthInfo = atom<"signin" | "signup" | false>({
+    key: "AuthInfo",
+    default: false, 
+  });
 
-// export const loadedBlogs = atom({
-//     key : 'loadedBlogs',
-//     default : {
-//         publishedDate : "Dec 31 2024",
-//         content : "Nothing to Display",
-//         title : "Title of the blog" ,
-//         id : "",
-//         author : {
-//         name : "Anonymous",
-//         description : "Description | Bio"
-//     }  
-//     }
-// })
-
-export default UserInfo
+// export default UserInfo

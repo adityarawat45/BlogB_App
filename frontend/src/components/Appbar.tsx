@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { CustomAvatar } from "./BlogCard"
 import { IoAddCircle } from "react-icons/io5"
 import { useRecoilValue } from "recoil"
-import UserInfo from "../hooks/recoil"
+import {UserInfo} from "../hooks/recoil"
 
 export const Appbar=() =>{
     const userinfo = useRecoilValue(UserInfo);
