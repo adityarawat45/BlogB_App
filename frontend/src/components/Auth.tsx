@@ -37,7 +37,7 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
     <div className="flex justify-center h-screen w-screen rounded-lg items-center flex-col">
         <div className="shadow-lg shadow-stone-400 md:w-1/3 w-auto bg-stone-300 rounded-2xl flex flex-col justify-center ">
             <div className="md:text-3xl text-xl font-bold flex mx-2 flex-row text-stone-700 justify-center mt-3"> {type == "signin" ? "Account Login" : "Create account"}</div>
-            <div className="text-stone-700  mx-2 text-sm md:text-md flex flex-row justify-center">{type ==="signin" ?"Don't have an account?" : "Already have an account?"}<button className="underline ml-2" onClick={()=>{setAuthType( type === "signin" ? "signup" : "signin")}}> {authType} </button></div>
+            <div className="text-stone-700  mx-2 text-sm md:text-md flex flex-row justify-center">{type ==="signup" ?"Don't have an account?" : "Already have an account?"}<button className="underline ml-2" onClick={()=>{setAuthType( type === "signin" ? "signup" : "signin")}}> {authType} </button></div>
             {type === "signup" ? <LabelledInput  title="Name" placeholder="Adam Young" onChange={(e)=>{
                 setpostInputs({
                     ...postInputs,
