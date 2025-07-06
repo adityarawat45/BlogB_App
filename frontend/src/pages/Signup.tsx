@@ -10,5 +10,4 @@ export const Signup = () => {
         <div className=""><Quote/></div>
     </div>
   </div> 
-  
 }
