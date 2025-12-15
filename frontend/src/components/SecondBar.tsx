@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 export const SecondBar = () => {
     return <div className="fixed w-screen top-0 z-50 bg-stone-300 backdrop-blur-xl border-b-stone-100 border-b-2 px-4 py-2 md:px-8 md:py-5 flex justify-between items-center">
