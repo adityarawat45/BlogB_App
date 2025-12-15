@@ -17,8 +17,9 @@ const Landing = () => {
         ></div>
       )}
       {showAuthModal && (
-        <div className="fixed inset-0 flex items-center h-screen w-screen justify-center z-50">
-            <Auth key={showAuthModal} type={showAuthModal} />
+        <div className="fixed flex items-center h-screen w-screen justify-center z-50">
+          {/* <div className="bg-slate-600"></div> */}
+            <Auth key={showAuthModal} type={showAuthModal} onClose={() => setShowAuthModal(false)} />
         </div>
       )}
       <SecondBar></SecondBar>

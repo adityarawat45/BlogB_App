@@ -5,7 +5,7 @@ export const SecondBar = () => {
     <div className="text-2xl md:text-4xl font-black cursor-pointer text-stone-700">
         Blogster
     </div>
-    <div className="flex flex-row gap-2 justify-center items-center">
+    {/* <div className="flex flex-row gap-2 justify-center items-center">
         <Link to={`signup`}>
         <div className="border invisible md:visible text-stone-700 font-extrabold text-2xl mx-4 rounded-md px-3 py-1.5 border-amber-950">Sign Up</div>
         </Link>
@@ -14,6 +14,6 @@ export const SecondBar = () => {
             Log In
         </div>
         </Link>
-    </div>
+    </div> */}
 </div>
 }
