@@ -13,26 +13,31 @@ const Auth = ({
   type: "signup" | "signin";
   onClose?: () => void;
 }) => {
-  console.log("Rendered the Auth componenet with type : ", type);
   const [userInfo, setUserinfo] = useRecoilState(UserInfo);
-  const [authType, setAuthType] = useRecoilState(AuthInfo);
+  const [, setAuthType] = useRecoilState(AuthInfo);
+
   const navigate = useNavigate();
+
   const [postInputs, setpostInputs] = useState<frontendsignupInput>({
     username: "",
     password: "",
     name: "",
   });
+
   const [authError, setAuthError] = useState<string>("");
 
   useEffect(() => {
     if (!onClose) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+
     document.addEventListener("keydown", onKey);
-    // prevent background scroll while modal is open
+
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
@@ -41,18 +46,25 @@ const Auth = ({
 
   async function sendReq() {
     setAuthError("");
+
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user${type === "signup" ? "/signup" : "/signin"}`,
+        `${BACKEND_URL}/api/v1/user${
+          type === "signup" ? "/signup" : "/signin"
+        }`,
         postInputs,
       );
+
       const jwt = response.data.jwt;
       const name = response.data.name;
+
       setUserinfo({
         ...userInfo,
         name,
       });
+
       localStorage.setItem("token", jwt);
+
       navigate("/blogs");
     } catch (e) {
       if (axios.isAxiosError(e) && e.response?.data?.message) {
@@ -62,88 +74,113 @@ const Auth = ({
       }
     }
   }
-  // if onClose is provided, render as a modal card (don't occupy full-screen)
+
   const outerClass = onClose
-    ? "flex justify-center w-full h-screen items-center p-4"
-    : "flex justify-center bg-slate-500 h-screen w-screen rounded-lg flex-col";
+    ? "flex justify-center w-full min-h-screen items-center pt-20 pb-6 px-4"
+    : "flex justify-center h-screen w-screen rounded-lg flex-col bg-[#ddd6cf]";
+
   const cardClass =
-    "shadow-lg shadow-stone-400 md:w-2/5 w-6/8 bg-stone-300 rounded-2xl flex flex-col justify-center relative";
+    "shadow-2xl md:w-2/5 w-[100%] bg-[#ebe3dc]/80 backdrop-blur-2xl border border-[#f5eee8]/40 rounded-[2rem] flex flex-col justify-center relative overflow-hidden";
 
   return (
     <div className={outerClass}>
       <div className={cardClass} onClick={(e) => e.stopPropagation()}>
+        {/* Glow */}
+        <div className="absolute top-[-5rem] right-[-5rem] h-40 w-40 rounded-full bg-amber-200/20 blur-3xl"></div>
+
+        {/* Close Button */}
         {onClose && (
           <button
             aria-label="Close"
             onClick={onClose}
-            className="absolute top-3 right-3 text-stone-700 hover:text-stone-900"
+            className="absolute top-4 right-4 text-[#7a655d] hover:text-[#5c4b44] transition-colors text-lg"
           >
             ✕
           </button>
         )}
-        <div className="md:text-3xl text-xl font-bold flex mx-2 flex-row text-stone-700 justify-center mt-3">
-          {" "}
-          {type == "signin" ? "Account Login" : "Create account"}
+
+        {/* Heading */}
+        <div className="md:text-4xl text-xl font-black flex mx-2 flex-row text-[#5c4b44] justify-center mt-5 md:mt-8 tracking-tight">
+          {type === "signin" ? "Welcome Back" : "Create Account"}
         </div>
-        <div className="text-stone-700 mx-4 text-xs md:text-md flex flex-row justify-center">
+
+        {/* Switch Auth */}
+        <div className="text-[#7a655d] mx-2 text-sm md:text-base flex flex-row justify-center mt-2">
           {type === "signup"
             ? "Already have an account?"
             : "Don't have an account?"}
+
           <button
-            className="underline ml-2"
+            className="underline ml-2 hover:text-[#5c4b44] transition-colors"
             onClick={() => {
               const nextType = type === "signin" ? "signup" : "signin";
+
               setAuthError("");
               setAuthType(nextType);
-              setpostInputs({ username: "", password: "", name: "" });
+
+              setpostInputs({
+                username: "",
+                password: "",
+                name: "",
+              });
             }}
           >
             {type === "signin" ? "Sign Up" : "Sign In"}
           </button>
         </div>
+
+        {/* Error */}
         {authError ? (
-          <div className="mx-2 md:mx-6 flex justify-center font-semibold px-2 py-1 text-sm text-red-500">
+          <div className="mx-5 md:mx-8 mt-3 flex justify-center rounded-xl bg-red-100/70 px-3 py-2 text-sm font-semibold text-red-500 backdrop-blur-md">
             {authError}
           </div>
         ) : null}
-        {type === "signup" ? (
+
+        {/* Inputs */}
+        <div className="mt-1 md:mt-2">
+          {type === "signup" ? (
+            <LabelledInput
+              title="Name"
+              placeholder="Adam Young"
+              onChange={(e) => {
+                setpostInputs({
+                  ...postInputs,
+                  name: e.target.value,
+                });
+              }}
+            />
+          ) : null}
+
           <LabelledInput
-            title="Name"
-            placeholder="Adam Young"
+            title="Username"
+            placeholder="Username / Email"
             onChange={(e) => {
               setpostInputs({
                 ...postInputs,
-                name: e.target.value,
+                username: e.target.value,
               });
             }}
-          ></LabelledInput>
-        ) : null}
-        <LabelledInput
-          title="Username"
-          placeholder="Username/Email"
-          onChange={(e) => {
-            setpostInputs({
-              ...postInputs,
-              username: e.target.value,
-            });
-          }}
-        ></LabelledInput>
-        <LabelledInput
-          title="Password"
-          placeholder="Password"
-          type="password"
-          onChange={(e) => {
-            setpostInputs({
-              ...postInputs,
-              password: e.target.value,
-            });
-          }}
-        ></LabelledInput>
-        <div className="flex flex-col mb-2 mx-4 md:mx-8 justify-center items-center">
+          />
+
+          <LabelledInput
+            title="Password"
+            placeholder="Password"
+            type="password"
+            onChange={(e) => {
+              setpostInputs({
+                ...postInputs,
+                password: e.target.value,
+              });
+            }}
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex flex-col mb-4 md:mb-5 mx-4 md:mx-8 justify-center items-center mt-3">
           <button
             type="button"
             onClick={sendReq}
-            className="py-2.5 px-5 w-full my-3 text-sm font-medium text-gray-100 focus:outline-none bg-stone-900 rounded-lg border border-gray-200 hover:bg-stone-700 hover:text-gray-200  focus:ring-gray-100"
+            className="py-2.5 md:py-3 px-5 w-full my-3 text-sm font-bold text-[#f8f5f2] bg-[#5c4b44] rounded-2xl hover:bg-[#4b3d37] transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
           >
             {type === "signup" ? "Sign Up" : "Sign In"}
           </button>
@@ -161,6 +198,7 @@ interface LabelledInputType {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }
+
 function LabelledInput({
   title,
   placeholder,
@@ -169,17 +207,17 @@ function LabelledInput({
 }: LabelledInputType) {
   return (
     <div className="mx-4 md:mx-8">
-      <label className="block mb-2 mt-1 text-sm font-semibold text-stone-700  ">
+      <label className="block mb-1.5 mt-2 text-sm font-semibold text-[#6d5c54]">
         {title}
       </label>
+
       <input
         onChange={onChange}
         type={type || "text"}
-        id="first_name"
-        className="bg-gray-50 border border-stone-400 focus:bg-gray-100  outline-stone-400 focus:outline-stone-500 text-stone-700 text-sm rounded-lg  w-full p-2.5 "
+        className="bg-[#f8f5f2]/80 border border-[#d8cfc8] focus:bg-[#f8f5f2] outline-none focus:border-[#b79f91] text-[#5c4b44] text-sm rounded-2xl w-full p-2.5 md:p-3 transition-all duration-300 backdrop-blur-sm"
         placeholder={placeholder}
         required
-      ></input>
+      />
     </div>
   );
 }
