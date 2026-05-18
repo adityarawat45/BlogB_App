@@ -5,83 +5,104 @@ import { AuthInfo } from "../hooks/recoil";
 import { useRecoilState } from "recoil";
 
 const Landing = () => {
-  console.log("Rendered the Landing page");
   const [showAuthModal, setShowAuthModal] = useRecoilState(AuthInfo);
+
   return (
-    <div className="w-full min-h-screen bg-stone-400 overflow-hidden">
+    <div className="relative w-full overflow-hidden bg-[#d6d3d1]">
+      {/* Background Glow */}
+      <div className="absolute top-[-12rem] left-[-12rem] h-[30rem] w-[30rem] rounded-full bg-stone-500/20 blur-3xl"></div>
+
+      <div className="absolute bottom-[-12rem] right-[-12rem] h-[30rem] w-[30rem] rounded-full bg-zinc-700/20 blur-3xl"></div>
+
+      {/* Modal */}
       {showAuthModal && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm z-40"
-          onClick={() => setShowAuthModal(false)}
-        ></div>
-      )}
-      {showAuthModal && (
-        <div className="fixed flex items-center h-screen w-screen justify-center z-50">
-          <Auth
-            key={showAuthModal}
-            type={showAuthModal}
-            onClose={() => setShowAuthModal(false)}
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+            onClick={() => setShowAuthModal(false)}
           />
-        </div>
+
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+            <Auth
+              key={showAuthModal}
+              type={showAuthModal}
+              onClose={() => setShowAuthModal(false)}
+            />
+          </div>
+        </>
       )}
-      <SecondBar></SecondBar>
 
-      <div className="w-full h-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-0">
-        {/* Left Section */}
-        <div className="h-screen md:h-screen bg-gradient-to-b from-stone-500 to-zinc-200 flex flex-col justify-center items-center pt-16 md:pt-32 px-4 md:px-8 rounded-b-3xl md:rounded-none border-b-stone-400 border-b-2 md:border-b-0">
-          <div className="text-center">
-            <div className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-stone-700 font-extrabold mb-4 md:mb-6">
+      <SecondBar />
+
+      {/* Main Layout */}
+      <div className="relative z-10 flex flex-col lg:flex-row">
+        {/* LEFT */}
+        <div className="flex min-h-screen w-full flex-col justify-center px-6 md:pt-28 pt-12 pb-12 sm:px-10 lg:w-1/2 lg:px-20 lg:pt-0 lg:pb-0">
+          <div>
+            <h1 className="text-6xl font-black leading-none tracking-tight text-stone-700 md:text-8xl mt-7">
               Blogster
-            </div>
+            </h1>
 
-            <div className="md:hidden text-2xl sm:text-3xl font-extrabold text-stone-100 mb-8 leading-tight">
-              Create. Share. Explore!
-            </div>
-
-            <div className="hidden md:block px-6 lg:px-12 py-4 text-center text-sm lg:text-lg font-medium text-stone-100 max-w-2xl mx-auto">
-              Welcome to our blogging hub, where ideas flourish and perspectives
-              thrive. Join us on a journey of discovery, where every word sparks
-              a new conversation and every post invites you to explore deeper.
-            </div>
+            <p className="mt-3 text-xl italic text-stone-600 lg:text-2xl">
+              Write your universe.
+            </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mt-8 md:mt-12 w-full">
+          <div className="mt-8 max-w-xl text-base font-medium leading-8 text-stone-600 sm:text-lg">
+            A minimal and aesthetic platform to share stories, thoughts, and
+            experiences — inspired by quiet nights, meaningful conversations,
+            and anime-inspired visuals.
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <button
               onClick={() => setShowAuthModal("signup")}
-              className="w-full sm:w-auto"
+              className="rounded-2xl bg-stone-700 px-10 py-3 text-lg font-bold text-stone-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
             >
-              <div className="border bg-gradient-to-tr from-slate-100 to-stone-200 text-stone-700 font-extrabold text-sm sm:text-base md:text-lg rounded-md px-8 md:px-12 py-2 md:py-3 hover:shadow-lg transition-shadow">
-                Sign Up
-              </div>
+              Start Writing
             </button>
+
             <button
               onClick={() => setShowAuthModal("signin")}
-              className="w-full sm:w-auto"
+              className="rounded-2xl border border-stone-700/20 bg-white/30 px-10 py-3 text-lg font-bold text-stone-700 backdrop-blur-xl transition-all duration-300 hover:bg-white/50"
             >
-              <div className="border bg-gradient-to-tr from-slate-100 to-stone-200 text-stone-700 font-extrabold text-sm sm:text-base md:text-lg rounded-md px-8 md:px-12 py-2 md:py-3 hover:shadow-lg transition-shadow">
-                Sign In
-              </div>
+              Sign In
             </button>
+          </div>
+
+          <div className="mt-14 hidden lg:block">
+            <p className="text-lg italic text-stone-500">
+              “Every late night thought deserves a place to exist.”
+            </p>
           </div>
         </div>
 
-        {/* Right Section */}
-        <div className="h-screen md:h-screen bg-stone-400 relative flex items-end justify-center p-4 md:p-0 overflow-hidden">
+        {/* RIGHT */}
+        <div className="relative h-[32rem] w-full overflow-hidden lg:h-screen lg:w-1/2">
           <img
             src={ThankYouCardImage}
-            className="w-full h-full object-cover rounded-3xl md:rounded-none opacity-90 absolute inset-0"
             alt="Background"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-          <div className="z-10 font-extrabold text-stone-100 text-center md:text-left px-4 md:px-12 pb-8 md:pb-16">
-            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl italic mb-2">
-              Made By
-            </div>
-            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl italic mb-3">
-              Aditya
-            </div>
-            <div className="text-lg sm:text-xl md:text-2xl lg:text-4xl">
-              With Love and Coffee....
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+          <div className="absolute bottom-6 left-6 right-6 z-10 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl shadow-2xl sm:max-w-md lg:bottom-10 lg:left-10 lg:right-auto lg:p-8">
+            <h2 className="text-2xl font-black italic text-stone-100 lg:text-3xl">
+              Crafted by Aditya
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-stone-300 lg:text-base">
+              Built with late-night energy, anime playlists, Cursor, and
+              coffee.
+            </p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <div className="h-3 w-3 animate-pulse rounded-full bg-green-400"></div>
+
+              <p className="text-sm font-medium text-stone-300">
+                currently shipping ideas
+              </p>
             </div>
           </div>
         </div>
