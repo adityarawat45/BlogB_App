@@ -64,10 +64,10 @@ const Auth = ({
   }
   // if onClose is provided, render as a modal card (don't occupy full-screen)
   const outerClass = onClose
-    ? "flex justify-center w-2/3 h-screen items-center p-4"
+    ? "flex justify-center w-full h-screen items-center p-4"
     : "flex justify-center bg-slate-500 h-screen w-screen rounded-lg flex-col";
   const cardClass =
-    "shadow-lg shadow-stone-400 md:w-1/3 w-screen bg-stone-300 rounded-2xl flex flex-col justify-center relative";
+    "shadow-lg shadow-stone-400 md:w-2/5 w-6/8 bg-stone-300 rounded-2xl flex flex-col justify-center relative";
 
   return (
     <div className={outerClass}>
@@ -85,7 +85,7 @@ const Auth = ({
           {" "}
           {type == "signin" ? "Account Login" : "Create account"}
         </div>
-        <div className="text-stone-700  mx-2 text-sm md:text-md flex flex-row justify-center">
+        <div className="text-stone-700 mx-4 text-xs md:text-md flex flex-row justify-center">
           {type === "signup"
             ? "Already have an account?"
             : "Don't have an account?"}
@@ -102,7 +102,7 @@ const Auth = ({
           </button>
         </div>
         {authError ? (
-          <div className="mx-4 md:mx-8 mt-3 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
+          <div className="mx-2 md:mx-6 flex justify-center font-semibold px-2 py-1 text-sm text-red-500">
             {authError}
           </div>
         ) : null}
