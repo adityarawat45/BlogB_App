@@ -1,26 +1,64 @@
-import { Link } from "react-router-dom"
-import { CustomAvatar } from "./BlogCard"
-import { IoAddCircle } from "react-icons/io5"
-import { useRecoilValue } from "recoil"
-import {UserInfo} from "../hooks/recoil"
+import { Link, useNavigate } from "react-router-dom";
+import { CustomAvatar } from "./BlogCard";
+import { IoAddCircle } from "react-icons/io5";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { UserInfo } from "../hooks/recoil";
+import { HiOutlineLogout } from "react-icons/hi";
 
-export const Appbar=() =>{
-    const userinfo = useRecoilValue(UserInfo);
-    return <div className="sticky top-0 z-50 bg-stone-300 border-b flex py-2 justify-between items-center px-5 md:px-8">
+export const Appbar = () => {
+  const userinfo = useRecoilValue(UserInfo);
+  const resetUser = useResetRecoilState(UserInfo);
+
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    resetUser();
+    navigate("/");
+  }
+
+  return (
+    <div className="fixed top-4 left-1/2 z-50 w-[95%] -translate-x-1/2">
+      <div className="flex items-center justify-between rounded-3xl border border-[#f5eee8]/40 bg-[#ebe3dc]/70 px-4 py-3 backdrop-blur-2xl shadow-xl md:px-8">
+        
+        {/* Logo */}
         <Link to="/">
-        <div className="text-lg md:text-xl font-extrabold cursor-pointer text-slate-900">
+          <div className="text-xl md:text-2xl font-black tracking-tight cursor-pointer text-[#5c4b44]">
             Blogster
-        </div>
+          </div>
         </Link>
-        <div className="flex flex-row justify-center items-center">
-        <Link to={`/publish`}>
-            <div className="mr-2 md:mr-5">
-                <div></div>
-                <button type="button"className=" flex justify-between items-center focus:outline-none px-2 md:px-3 py-1 md:py-2  my-2 text-white bg-green-700 hover:bg-green-800  focus:ring-green-300 font-normal md:font-medium rounded-2xl text-xs"> New <div className="ml-2"><IoAddCircle/> </div> 
-                </button></div></Link>
-                <div>
-                <CustomAvatar name={userinfo.name}></CustomAvatar>
-                </div>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-2 md:gap-4">
+          
+          {/* Write Button */}
+          <Link to="/publish">
+            <button
+              type="button"
+              className="group flex items-center rounded-2xl bg-[#5c4b44] px-3 md:px-5 py-2 text-xs md:text-sm font-semibold text-[#f8f5f2] transition-all duration-300 hover:scale-[1.03] hover:bg-[#4b3d37] hover:shadow-xl"
+            >
+              <span className="hidden md:block">Write</span>
+
+              <div className=" md:ml-2 text-base transition-transform duration-300 group-hover:rotate-90">
+                <IoAddCircle />
+              </div>
+            </button>
+          </Link>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center rounded-2xl border border-[#d8cfc8] bg-white/40 p-2.5 text-[#5c4b44] backdrop-blur-xl transition-all duration-300 hover:bg-white/70 hover:shadow-lg"
+          >
+            <HiOutlineLogout className="text-lg" />
+          </button>
+
+          {/* Avatar */}
+          <div className="scale-95 md:scale-100">
+            <CustomAvatar name={userinfo.name} />
+          </div>
         </div>
+      </div>
     </div>
-}
+  );
+};
