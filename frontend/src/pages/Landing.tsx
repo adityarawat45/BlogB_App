@@ -8,11 +8,11 @@ const Landing = () => {
   const [showAuthModal, setShowAuthModal] = useRecoilState(AuthInfo);
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#d6d3d1]">
+    <div className="relative w-full overflow-hidden bg-[#ddd6cf]">
       {/* Background Glow */}
-      <div className="absolute top-[-12rem] left-[-12rem] h-[30rem] w-[30rem] rounded-full bg-stone-500/20 blur-3xl"></div>
+      <div className="absolute top-[-12rem] left-[-12rem] h-[30rem] w-[30rem] rounded-full bg-amber-300/20 blur-3xl"></div>
 
-      <div className="absolute bottom-[-12rem] right-[-12rem] h-[30rem] w-[30rem] rounded-full bg-zinc-700/20 blur-3xl"></div>
+      <div className="absolute bottom-[-12rem] right-[-12rem] h-[30rem] w-[30rem] rounded-full bg-orange-300/10 blur-3xl"></div>
 
       {/* Modal */}
       {showAuthModal && (
@@ -36,49 +36,73 @@ const Landing = () => {
 
       {/* Main Layout */}
       <div className="relative z-10 flex flex-col lg:flex-row">
-        {/* LEFT */}
-        <div className="flex min-h-screen w-full flex-col justify-center px-6 md:pt-28 pt-12 pb-12 sm:px-10 lg:w-1/2 lg:px-20 lg:pt-0 lg:pb-0">
-          <div>
-            <h1 className="text-6xl font-black leading-none tracking-tight text-stone-700 md:text-8xl mt-7">
-              Blogster
-            </h1>
+        {/* LEFT SECTION */}
+        <div className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden px-6 pt-20 pb-12 sm:px-10 lg:w-1/2 lg:bg-transparent lg:px-20 lg:pt-0 lg:pb-0">
+          
+          {/* Mobile Background Image */}
+          <div className="absolute inset-0 lg:hidden">
+            <img
+              src={ThankYouCardImage}
+              alt="Background"
+              className="h-full w-full object-cover"
+            />
 
-            <p className="mt-3 text-xl italic text-stone-600 lg:text-2xl">
-              Write your universe.
-            </p>
+            <div className="absolute inset-0 bg-black/55"></div>
           </div>
 
-          <div className="mt-8 max-w-xl text-base font-medium leading-8 text-stone-600 sm:text-lg">
-            A minimal and aesthetic platform to share stories, thoughts, and
-            experiences — inspired by quiet nights, meaningful conversations,
-            and anime-inspired visuals.
-          </div>
+          {/* Content */}
+          <div className="relative z-10">
+            <div>
+              <h1 className="md:mt-16 text-6xl font-black leading-none tracking-tight text-stone-100 md:text-8xl lg:mt-0 lg:text-[#5c4b44]">
+                Blogster
+              </h1>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <button
-              onClick={() => setShowAuthModal("signup")}
-              className="rounded-2xl bg-stone-700 px-10 py-3 text-lg font-bold text-stone-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-            >
-              Start Writing
-            </button>
+              <p className="mt-3 text-xl italic text-stone-300 lg:text-2xl lg:text-[#6d5c54]">
+                Write your universe.
+              </p>
+            </div>
 
-            <button
-              onClick={() => setShowAuthModal("signin")}
-              className="rounded-2xl border border-stone-700/20 bg-white/30 px-10 py-3 text-lg font-bold text-stone-700 backdrop-blur-xl transition-all duration-300 hover:bg-white/50"
-            >
-              Sign In
-            </button>
-          </div>
+            <div className="mt-8 max-w-xl text-base font-medium leading-8 text-stone-200 sm:text-lg lg:text-[#6d5c54]">
+              A minimal and aesthetic platform to share stories, thoughts, and
+              experiences — inspired by quiet nights, meaningful conversations,
+              and anime-inspired visuals.
+            </div>
 
-          <div className="mt-14 hidden lg:block">
-            <p className="text-lg italic text-stone-500">
-              “Every late night thought deserves a place to exist.”
-            </p>
+            {/* Buttons */}
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <button
+                onClick={() => setShowAuthModal("signup")}
+                className="rounded-2xl bg-stone-100 px-10 py-3 text-lg font-bold text-stone-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl lg:bg-[#5c4b44] lg:text-stone-100 lg:hover:bg-[#4b3d37]"
+              >
+                Start Writing
+              </button>
+
+              <button
+                onClick={() => setShowAuthModal("signin")}
+                className="rounded-2xl border border-stone-200/20 bg-white/10 px-10 py-3 text-lg font-bold text-stone-100 backdrop-blur-xl transition-all duration-300 hover:bg-white/20 lg:border-[#5c4b44]/10 lg:bg-white/30 lg:text-[#5c4b44] lg:hover:bg-white/50"
+              >
+                Sign In
+              </button>
+            </div>
+
+            {/* Mobile Quote */}
+            <div className="mt-12 lg:hidden">
+              <p className="text-sm italic leading-7 text-stone-300">
+                “Every late night thought deserves a place to exist.”
+              </p>
+            </div>
+
+            {/* Desktop Quote */}
+            <div className="mt-14 hidden lg:block">
+              <p className="text-lg italic text-[#7a655d]">
+                “Every late night thought deserves a place to exist.”
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="relative h-[32rem] w-full overflow-hidden lg:h-screen lg:w-1/2">
+        {/* RIGHT SECTION - ONLY LARGE SCREENS */}
+        <div className="relative hidden h-screen w-1/2 overflow-hidden lg:block">
           <img
             src={ThankYouCardImage}
             alt="Background"
@@ -87,21 +111,22 @@ const Landing = () => {
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-          <div className="absolute bottom-6 left-6 right-6 z-10 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl shadow-2xl sm:max-w-md lg:bottom-10 lg:left-10 lg:right-auto lg:p-8">
-            <h2 className="text-2xl font-black italic text-stone-100 lg:text-3xl">
+          {/* Floating Card */}
+          <div className="absolute bottom-10 left-10 z-10 max-w-md rounded-3xl border border-[#f5eee8]/10 bg-[#f5eee8]/10 p-8 backdrop-blur-xl shadow-2xl">
+            <h2 className="text-3xl font-black italic text-stone-100">
               Crafted by Aditya
             </h2>
 
-            <p className="mt-4 text-sm leading-7 text-stone-300 lg:text-base">
+            <p className="mt-4 text-base leading-7 text-stone-300">
               Built with late-night energy, anime playlists, Cursor, and
               coffee.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
-              <div className="h-3 w-3 animate-pulse rounded-full bg-green-400"></div>
+              <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400"></div>
 
               <p className="text-sm font-medium text-stone-300">
-                currently shipping ideas
+                Currently shipping ideas
               </p>
             </div>
           </div>
