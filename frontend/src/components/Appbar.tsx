@@ -39,7 +39,7 @@ export const Appbar = () => {
             >
               <span className="hidden md:block">Write</span>
 
-              <div className=" md:ml-2 text-base transition-transform duration-300 group-hover:rotate-90">
+              <div className=" md:ml-2cl text-base transition-transform duration-300 group-hover:rotate-90">
                 <IoAddCircle />
               </div>
             </button>
